@@ -5,6 +5,7 @@ p.sort()
 
 time = 0
 tmp = 0
+
 for i in p:
     tmp += i
     time += tmp
