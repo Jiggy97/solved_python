@@ -14,6 +14,8 @@ def bfs(graph, start, visited):
         print(v, end=' ')
         # 해당 원소와 연결된, 아직 방문하지 않은 원소들을 큐에 삽입
         for i in graph[v]:
+            # 현재 탐색한 노드 i[0] 방문 여부를 따져야 할 노드는 i[0]과 간선으로 연결 되어 있는 i[1]
+            # 방문하지 않았을 경우 i[1]노드 큐에 입력 후 방문처리
             if not visited[i[1]]:
                 queue.append(i[1])
                 visited[i[1]] = True
@@ -26,23 +28,27 @@ def dfs(graph, start, visited):
     print(start, end=' ')
     # 현재 노드와 다른 노드를 재귀적으로 방문
     for i in graph[start]:
+        # 현재 탐색한 노드 i[0] 방문 여부를 따져야 할 노드는 i[0]과 간선으로 연결 되어 있는 i[1]
+        # 방문하지 않았을 경우 i[1]노드를 기준으로 다시 탐색
         if not visited[i[1]]:
             dfs(graph, i[1], visited)
 
 
 n, m, v = map(int, input().split())
-g = [[] for _ in range(n + 1)]
+graph = [[] for _ in range(n + 1)]
 
 for _ in range(m):
     a, b = map(int, input().split())
-    g[a].append((a, b))
-    g[b].append((b, a))
+    # 양방향으로 간선 그래프에 입력
+    graph[a].append((a, b))
+    graph[b].append((b, a))
 
-for line in g:
+# 오름 차순으로 그래프 정렬
+for line in graph:
     line.sort(key=lambda x: (x[1], x[0]))
 
 dfs_vis = [False] * (n + 1)
-dfs(g, v, dfs_vis)
+dfs(graph, v, dfs_vis)
 print()
 bfs_vis = [False] * (n + 1)
-bfs(g, v, bfs_vis)
+bfs(graph, v, bfs_vis)
