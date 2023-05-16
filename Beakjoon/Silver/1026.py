@@ -1,18 +1,13 @@
-n = int(input())
+N = int(input())
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
 
-B_1 = sorted(B, reverse=True)
-indexes = []
-for i in B_1:
-    indexes.append(B.index(i))
+# A는 오름차순, B는 내림차순으로 정렬
+A.sort()
 
-A_tmp = sorted(A)
-for i in range(n):
-    A[indexes[i]] = A_tmp[i]
+result = 0
+for a in A:
+    result += a * max(B)
+    B.pop(B.index(max(B)))
 
-S = 0
-for i in range(n):
-    S += A[i] * B[i]
-
-print(S)
+print(result)
