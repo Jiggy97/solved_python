@@ -5,6 +5,7 @@ def d(n):
         n //= 10
     return next_num
 
+
 def solution():
     numbers = set(range(1, 10001))
     self_numbers = set()
