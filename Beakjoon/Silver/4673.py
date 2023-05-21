@@ -19,6 +19,7 @@ def solution():
     result = numbers - self_numbers
     return sorted(result)
 
+
 # 결과 출력
 answer = solution()
 for num in answer:
