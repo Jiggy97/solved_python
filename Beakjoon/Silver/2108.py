@@ -17,18 +17,18 @@ median = n_list[int(n/2)]
 # counts = Counter(n_list)
 # mode_value = max(counts, key=counts.get)
 
-mode = Counter(n_list).most_common()
-mode_value = 0
-if len(mode) == 1:
-    mode_value = mode[0][0]
-elif mode[0][1] == mode[1][1]:
-    mode_value = mode[1][0]
+counts = Counter(n_list).most_common()
+mode = 0
+if len(counts) == 1:
+    mode = counts[0][0]
+elif counts[0][1] == counts[1][1]:
+    mode = counts[1][0]
 else:
-    mode_value = mode[0][0]
+    mode = counts[0][0]
 
 range_n = max(n_list) - min(n_list)
 
 print(mean)
 print(median)
-print(mode_value)
+print(mode)
 print(range_n)
