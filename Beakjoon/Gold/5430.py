@@ -1,34 +1,38 @@
-def stringToArr(string_arr):
-    arr = []
-    for char in string_arr:
-        if char == '[' or char == ']' or char == ',':
-           continue
-        arr.append(int(char))
-
-    return arr
+from collections import deque
 
 
-def AC(function, num, string):
-    array = stringToArr(string)
-    for idx in range(len(function)):
-        if array is None:
-            return "error"
+def AC(function, num, array):
+    queue = deque(array)
+    flag = 0
 
-        if function[idx] == 'R':
-            if function[idx + 1] == 'R':
-                function = function[:idx] + function[idx + 2:]
+    if num == 0:
+        queue = []
+
+    for j in function:
+        if j == 'R':
+            flag += 1
+            continue
+
+        if j == 'D':
+            if len(queue) == 0:
+                return "error"
+            if flag % 2 == 0:
+                queue.popleft()
             else:
-                array = array[::-1]
+                queue.pop()
 
-        if function[idx] == 'D':
-            array.pop(0)
-
-    return array
+    else:
+        if flag % 2 == 0:
+            return "[" + ",".join(queue) + "]"
+        else:
+            queue.reverse()
+            return "[" + ",".join(queue) + "]"
 
 
 T = int(input())
-for i in range(T):
+for _ in range(T):
     p = input()
     n = int(input())
-    st = input()
-    print(AC(p, n, st))
+    arr = input()[1:-1].split(',')
+
+    print(AC(p, n, arr))
