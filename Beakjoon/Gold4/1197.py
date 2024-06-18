@@ -25,6 +25,7 @@ class UnionFind:
                 self.parent[root_v] = root_u
                 self.rank[root_u] += 1
 
+
 def kruskal(edges, V):
     # 간선을 가중치의 오름차순으로 정렬
     edges.sort(key=lambda x: x[2])
